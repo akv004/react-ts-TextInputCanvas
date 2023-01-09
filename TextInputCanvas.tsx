@@ -4,7 +4,12 @@ import { atom, useRecoilState } from 'recoil';
 
 const textState = atom({
   key: 'textState',
-  default: '',
+  default: '6546',
+});
+
+const selectionState = atom({
+  key: 'selectionState',
+  default: { start: 0, end: 0 },
 });
 
 export const  TextInputCanvas= ()=> {
@@ -44,6 +49,7 @@ export const  TextInputCanvas= ()=> {
   }
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    console.log("ddd");
     const { value } = event.target;
     setText(value);
     setSelection({ start: value.length, end: value.length });
@@ -87,6 +93,7 @@ export const  TextInputCanvas= ()=> {
         className="canvas"
         onClick={() => canvasRef.current?.focus()}
         onKeyDown={handleKeyDown}
+        onChange={handleInputChange}
       />
     </div>
   );
