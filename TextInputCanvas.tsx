@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { atom, useRecoilState } from 'recoil';
 
-
 const textState = atom({
   key: 'textState',
   default: '6546',
@@ -12,7 +11,7 @@ const selectionState = atom({
   default: { start: 0, end: 0 },
 });
 
-export const  TextInputCanvas= ()=> {
+export const TextInputCanvas = () => {
   const [text, setText] = useRecoilState(textState);
   const [selection, setSelection] = useRecoilState(selectionState);
 
@@ -49,7 +48,7 @@ export const  TextInputCanvas= ()=> {
   }
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    console.log("ddd");
+    console.log('ddd');
     const { value } = event.target;
     setText(value);
     setSelection({ start: value.length, end: value.length });
@@ -78,11 +77,17 @@ export const  TextInputCanvas= ()=> {
       setSelection({ start: text.length, end: text.length });
     } else if (event.key === 'Backspace') {
       if (selection.start === selection.end) {
-        setText(text.substring(0, selection.start - 1) + text.substring(selection.end));
+        setText(
+          text.substring(0, selection.start - 1) + text.substring(selection.end)
+        );
         setSelection({ start: selection.start - 1, end: selection.start - 1 });
       } else {
-        setText(text.substring(0, selection.start) + text.substring(selection.end));
+        setText(
+          text.substring(0, selection.start) + text.substring(selection.end)
+        );
       }
+    } else {
+      setText('a');
     }
   }
 
@@ -93,10 +98,7 @@ export const  TextInputCanvas= ()=> {
         className="canvas"
         onClick={() => canvasRef.current?.focus()}
         onKeyDown={handleKeyDown}
-        onChange={handleInputChange}
       />
     </div>
   );
-}
-
-    
+};
